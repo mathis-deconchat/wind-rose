@@ -1,0 +1,46 @@
+@if (chartOption) {
+  <div class="space-y-8">
+    <!-- Controls Panel -->
+    <div class="bg-gray-800/80 rounded-2xl p-6 backdrop-blur-sm border border-gray-700/50 shadow-xl">
+      <div class="mb-6">
+        <h3 class="text-lg font-medium text-gray-200">Chart Configuration</h3>
+        <p class="text-sm text-gray-400">Customize the wind rose visualization while maintaining 10° direction steps</p>
+      </div>
+      
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        @for (control of controls; track control.id) {
+          <div class="space-y-2">
+            <label class="block text-sm font-medium text-gray-300">
+              {{control.label}}
+              <div class="group relative mt-2">
+                <input 
+                  type="number" 
+                  [(ngModel)]="control.value" 
+                  (ngModelChange)="updateChart()"
+                  [min]="control.min" 
+                  [max]="control.max" 
+                  class="block w-full rounded-lg bg-gray-700/50 border border-gray-600/50 text-white px-4 py-2.5 
+                         focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200
+                         hover:border-gray-500/50"
+                >
+                <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-xs bg-gray-800/90 px-1.5 py-0.5 rounded">
+                  {{control.unit}}
+                </span>
+                <div class="absolute -bottom-6 left-0 text-xs text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                  Range: {{control.min}} - {{control.max}}
+                </div>
+              </div>
+            </label>
+          </div>
+        }
+      </div>
+    </div>
+    
+    <!-- Chart Container -->
+    <div class="bg-gray-800/50 rounded-2xl p-8 backdrop-blur-sm border border-gray-700/50 shadow-xl">
+      <div class="h-[600px] w-[600px] mx-auto">
+        <div echarts [options]="chartOption" class="h-full w-full"></div>
+      </div>
+    </div>
+  </div>
+}

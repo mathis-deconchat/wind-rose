@@ -1,0 +1,11 @@
+@if (chartOption) {
+  <div class="bg-gray-800/50 rounded-2xl p-8 backdrop-blur-sm border border-gray-700/50 shadow-xl">
+    <div class="mb-6">
+      <h3 class="text-lg font-medium text-gray-200">Reference Wind Rose</h3>
+      <p class="text-sm text-gray-400">Standard 36-point wind direction visualization</p>
+    </div>
+    <div class="h-[600px] w-[600px] mx-auto">
+      <div echarts [options]="chartOption" class="h-full w-full"></div>
+    </div>
+  </div>
+}

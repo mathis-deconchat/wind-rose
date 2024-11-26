@@ -1,0 +1,61 @@
+@if (isOpen) {
+  <div class="fixed inset-0 z-50 overflow-y-auto">
+    <div class="flex items-center justify-center min-h-screen p-4">
+      <!-- Backdrop -->
+      <div class="fixed inset-0 bg-black/70 backdrop-blur-sm transition-opacity"></div>
+      
+      <!-- Modal -->
+      <div class="relative bg-gray-800/95 rounded-2xl max-w-4xl w-full max-h-[80vh] overflow-hidden z-10 border border-gray-700/50 shadow-2xl transform transition-all">
+        <!-- Header -->
+        <div class="flex justify-between items-center p-6 border-b border-gray-700/50">
+          <div>
+            <h3 class="text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-purple-300">
+              Wind Data Analysis
+            </h3>
+            <p class="text-gray-400 text-sm mt-1">
+              Detailed view of {{windData.length}} data points
+            </p>
+          </div>
+          <button 
+            (click)="close()"
+            class="text-gray-400 hover:text-white transition-colors duration-200 p-2 hover:bg-gray-700/50 rounded-lg"
+            aria-label="Close modal">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+        
+        <!-- Content -->
+        <div class="p-6 overflow-y-auto max-h-[60vh]">
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            @for (point of windData; track $index) {
+              <div class="bg-gray-700/30 p-4 rounded-xl border border-gray-600/30 backdrop-blur-sm hover:bg-gray-700/40 transition-colors duration-200">
+                <div class="text-sm text-gray-400 mb-2">Point {{$index + 1}}</div>
+                <div class="space-y-1">
+                  <div class="text-indigo-300 font-medium flex justify-between">
+                    <span>Angle:</span>
+                    <span>{{point.angle.toFixed(1)}}°</span>
+                  </div>
+                  <div class="text-indigo-300 font-medium flex justify-between">
+                    <span>Speed:</span>
+                    <span>{{point.speed.toFixed(1)}} km/h</span>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="p-6 border-t border-gray-700/50 flex justify-end">
+          <button 
+            (click)="close()"
+            class="bg-indigo-600/80 hover:bg-indigo-600 text-white px-6 py-2.5 rounded-lg text-sm font-medium transition-colors duration-200">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+}
